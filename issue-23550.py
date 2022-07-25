@@ -12,13 +12,15 @@ for i, nbh in enumerate(masked):
     conn[i, nbh] = False
     conn[nbh, i] = False
 X = rng.randn(n_samples, 1)
+print("X")
+print(X)
 clustering = AgglomerativeClustering(
     n_clusters=None,
     distance_threshold=1,
     connectivity=conn,
     linkage='complete',
     affinity='l1',
-)
+)distance_threshold
 clustering.fit(X)
 df = pd.DataFrame({'labels': clustering.labels_, 'x': X.flatten()})
 clustered_df = df.groupby('labels').agg(**{op: ('x', op) for op in ['min', 'max']})
